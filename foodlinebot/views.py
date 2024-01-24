@@ -129,11 +129,17 @@ def callback(request):
                                     reply_arr
                                 )
                 elif user_input =='刪除食物':
-                    user_states[user_id] = 'waiting_for_food_name_to_delete'
-                    line_bot_api.reply_message(
+                    if len(Food_Info.objects.all().order_by('expiration'))==0:
+                        line_bot_api.reply_message(
                         event.reply_token,
-                        TextSendMessage(text="請輸入要刪除的食物名稱")
+                        TextSendMessage(text="您的零食櫃沒有零食喔～")
                     )
+                    else:
+                        user_states[user_id] = 'waiting_for_food_name_to_delete'
+                        line_bot_api.reply_message(
+                            event.reply_token,
+                            TextSendMessage(text="請輸入要刪除的食物名稱")
+                        )
                 elif current_state == 'waiting_for_food_name_to_delete':
                     user_states.pop(user_id, None)
                     data=Food_Info.objects.filter(name=user_input)
