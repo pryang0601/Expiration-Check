@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-_2)w#(2d9%c3qbhy2l0t^+y^ldizgy)g@t=ll6kjah=uf5c2+&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['7ed4-111-240-30-103.ngrok-free.app']
+ALLOWED_HOSTS = ['expiration-check-linebot.onrender.com']
 
 
 # Application definition
