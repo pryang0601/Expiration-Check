@@ -67,7 +67,7 @@ def callback(request):
                     user_food.append(user_input)
                     line_bot_api.reply_message(
                         event.reply_token,
-                        TextSendMessage(text="請輸入食物過期日期，請以-做區隔\n(例:2024-01-01)")
+                        TextSendMessage(text="請輸入食物過期日期，請以-做區隔\n(例:2024-xx-xx)")
                     )
                 elif current_state == 'waiting_for_expiration_date':
                     # Save the expiration date and reply with "done"
@@ -80,7 +80,7 @@ def callback(request):
                         sticker_id = '10866'
                     )
                     reply_arr = []
-                    reply_arr.append(TextSendMessage(text="加入完成！"))
+                    reply_arr.append(TextSendMessage(text="新增成功！"))
                     reply_arr.append(sticker_message)
                     
                     line_bot_api.reply_message(
@@ -143,8 +143,8 @@ def callback(request):
                         sticker_id = '1999'
                     )
                     reply_arr = []
-                    reply_arr.append(sticker_message)
                     reply_arr.append(TextSendMessage(text="刪除成功"))
+                    reply_arr.append(sticker_message)
                     line_bot_api.reply_message(
                         event.reply_token,
                         reply_arr
