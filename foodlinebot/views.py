@@ -156,7 +156,7 @@ def callback(request):
                     message = ''
                     if len(danger_foods)>0:
                         for idx,danger_food in enumerate(danger_foods):
-                            days_left = (danger_food[1] - datetime.now().date()).days
+                            days_left = (danger_food[1].date() - today).days
                             if days_left > 0:
                                 message+= str(idx+1)+". "+danger_food[0]+"會在"+str(danger_food[1])+"過期，還剩"+str(days_left)+"天。\n\n"
                             else:
