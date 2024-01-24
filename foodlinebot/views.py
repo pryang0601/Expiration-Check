@@ -57,7 +57,7 @@ def callback(request):
                     user_states[user_id] = 'waiting_for_food_name'
                     line_bot_api.reply_message(
                         event.reply_token,
-                        TextSendMessage(text="請輸入食物名稱")
+                        TextSendMessage(text="請輸入要新增的食物名稱")
                     )
                 elif current_state == 'waiting_for_food_name':
                     # Save the food name and ask for the expiration date
@@ -67,7 +67,7 @@ def callback(request):
                     user_food.append(user_input)
                     line_bot_api.reply_message(
                         event.reply_token,
-                        TextSendMessage(text="請輸入食物過期日期，請以-做區隔\n(例:2024-xx-xx)")
+                        TextSendMessage(text="請輸入食物的過期日期，並以-做區隔\n(例:2024-xx-xx)")
                     )
                 elif current_state == 'waiting_for_expiration_date':
                     # Save the expiration date and reply with "done"
@@ -102,7 +102,7 @@ def callback(request):
                         for idx,data in enumerate(datas):
                             message+= str(idx+1)+". "+data.name+"是在"+str(data.start)+"進來的，並會在"+str(data.expiration)+"過期。\n\n"
                             
-                        message+="請享用並開始減肥！"
+                        message+="請慢慢享用並開始減肥！"
                         sticker_message = StickerSendMessage(
                             package_id = '6325',
                             sticker_id = '10979906'
@@ -132,7 +132,7 @@ def callback(request):
                     user_states[user_id] = 'waiting_for_food_name_to_delete'
                     line_bot_api.reply_message(
                         event.reply_token,
-                        TextSendMessage(text="請輸入食物名稱")
+                        TextSendMessage(text="請輸入要刪除的食物名稱")
                     )
                 elif current_state == 'waiting_for_food_name_to_delete':
                     user_states.pop(user_id, None)
