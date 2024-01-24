@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-
+import dj_database_url
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -76,15 +77,26 @@ WSGI_APPLICATION = 'mylinebot.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Expiration',  #資料庫名稱
-        'USER': 'postgres',  #資料庫帳號
-        'HOST': 'localhost',  #Server(伺服器)位址
-        'PORT': '5432'  #PostgreSQL Port號
-    }
-}
+if not DEBUG:
+    DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': 'db.sqlite3',
+            'USER': 'postgres',  #資料庫帳號
+            'HOST': 'localhost',  #Server(伺服器)位址
+            'PORT': '5432'  #PostgreSQL Port號
+        }}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'Expiration',  #資料庫名稱
+#         'USER': 'postgres',  #資料庫帳號
+#         'HOST': 'localhost',  #Server(伺服器)位址
+#         'PORT': '5432'  #PostgreSQL Port號
+#     }
+# }
 
 
 # Password validation
