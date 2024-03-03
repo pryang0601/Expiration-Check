@@ -9,11 +9,8 @@ from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import (
     MessageEvent,
-    TextMessage,
     TextSendMessage,
     StickerSendMessage,
-    ButtonsTemplate,
-    MessageTemplateAction
 )
 from foodlinebot.models import *
 
@@ -90,10 +87,12 @@ def callback(request):
                     
                     # Save the food information to the Django database
                     today = datetime.now().date()
+                    # print(today)
                     user_food[1] = user_food[1].replace('/', '-').replace('.', '-')
                     user_food[1] = datetime.strptime(user_food[1], "%Y-%m-%d").date()
-                    food = Food_Info(name=user_food[0], start= today, expiration=user_food[1])
-                    food.save()
+                    Food_Info.objects.create(name=user_food[0], start= today, expiration=user_food[1])
+                    #food = Food_Info(name=user_food[0], start= today, expiration=user_food[1])
+                    # food.save()
                     # Reset the session after completing the task
                 elif user_input == '食物一覽表':
                     datas=Food_Info.objects.all().order_by('expiration')
@@ -142,8 +141,9 @@ def callback(request):
                         )
                 elif current_state == 'waiting_for_food_name_to_delete':
                     user_states.pop(user_id, None)
-                    data=Food_Info.objects.filter(name=user_input)
-                    data.delete()
+                    Food_Info.objects.filter(name=user_input)
+                    # data=Food_Info.objects.filter(name=user_input)
+                    # data.delete()
                     sticker_message = StickerSendMessage(
                         package_id = '446',
                         sticker_id = '1999'
@@ -162,7 +162,7 @@ def callback(request):
                     message = ''
                     if len(danger_foods)>0:
                         for idx,danger_food in enumerate(danger_foods):
-                            days_left = (danger_food[1].date() - today).days
+                            days_left = (danger_food[1] - today).days
                             if days_left > 0:
                                 message+= str(idx+1)+". "+danger_food[0]+"會在"+str(danger_food[1])+"過期，還剩"+str(days_left)+"天。\n\n"
                             else:

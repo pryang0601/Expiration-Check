@@ -16,8 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from foodlinebot import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('foodlinebot/', include('foodlinebot.urls'))
+    path('callback', views.callback),
+    #path('foodlinebot/', include('foodlinebot.urls'))
 ]

@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-_2)w#(2d9%c3qbhy2l0t^+y^ldizgy)g@t=ll6kjah=uf5c2+&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['expiration-check-linebot.onrender.com']
+ALLOWED_HOSTS = ['0992-111-240-13-2.ngrok-free.app','127.0.0.1']
 
 
 # Application definition
@@ -77,26 +77,26 @@ WSGI_APPLICATION = 'mylinebot.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-if not DEBUG:
-    DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))}
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': 'db.sqlite3',
-            'USER': 'postgres',  #資料庫帳號
-            'HOST': 'localhost',  #Server(伺服器)位址
-            'PORT': '5432'  #PostgreSQL Port號
-        }}
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'Expiration',  #資料庫名稱
-#         'USER': 'postgres',  #資料庫帳號
-#         'HOST': 'localhost',  #Server(伺服器)位址
-#         'PORT': '5432'  #PostgreSQL Port號
-#     }
-# }
+# if not DEBUG:
+#     DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))}
+# else:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': 'db.sqlite3',
+#             'USER': 'postgres',  #資料庫帳號
+#             'HOST': 'localhost',  #Server(伺服器)位址
+#             'PORT': '5432'  #PostgreSQL Port號
+#         }}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'Expiration',  #資料庫名稱
+        'USER': 'postgres',  #資料庫帳號
+        'HOST': 'localhost',  #Server(伺服器)位址
+        'PORT': '5432'  #PostgreSQL Port號
+    }
+}
 
 
 # Password validation
